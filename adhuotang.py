@@ -463,41 +463,41 @@ except Exception as e:
     print("发生异常:", str(e))
     print("推荐自动化任务执行失败")
     
-# try:
-#     play_details_page()
-#     print("播放详情页自动化任务执行成功")
-# except Exception as e:
-#     print("发生异常:", str(e))
-#     print("播放详情页自动化任务执行失败")
+try:
+    play_details_page()
+    print("播放详情页自动化任务执行成功")
+except Exception as e:
+    print("发生异常:", str(e))
+    print("播放详情页自动化任务执行失败")
 
-# try:
-#     theater()
-#     print("剧场tab自动化任务执行成功")
-# except Exception as e:
-#     print("发生异常:", str(e))
-#     print("剧场tab自动化任务执行失败")
+try:
+    theater()
+    print("剧场tab自动化任务执行成功")
+except Exception as e:
+    print("发生异常:", str(e))
+    print("剧场tab自动化任务执行失败")
 
-# try:
-#     history()
-#     print("在看剧自动化任务执行成功")
-# except Exception as e:
-#     print("发生异常:", str(e))
-#     print("在看剧自动化任务执行失败")
+try:
+    history()
+    print("在看剧自动化任务执行成功")
+except Exception as e:
+    print("发生异常:", str(e))
+    print("在看剧自动化任务执行失败")
 
-# try:
-#     welfare()
-#     print("福利自动化任务执行成功")
-# except Exception as e:
-#     print("发生异常:", str(e))
-#     print("福利自动化任务执行失败")
+try:
+    welfare()
+    print("福利自动化任务执行成功")
+except Exception as e:
+    print("发生异常:", str(e))
+    print("福利自动化任务执行失败")
     
-# try:
-#     my()
-#     stop_app('com.jz.htdj')
-#     print("我的自动化任务执行成功")
-# except Exception as e:
-#     print("发生异常:", str(e))
-#     print("我的自动化任务执行失败")
+try:
+    my()
+    stop_app('com.jz.htdj')
+    print("我的自动化任务执行成功")
+except Exception as e:
+    print("发生异常:", str(e))
+    print("我的自动化任务执行失败")
 
 # generate html report
 # from airtest.report.report import simple_report
