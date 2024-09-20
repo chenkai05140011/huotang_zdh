@@ -51,7 +51,6 @@ def ad_clos():
         assert_equal("1", "1", "激励视频观看完成")
         sleep(1)
     sleep(5)
-#         touch(Template(r"tpl1726293968764.png", record_pos=(0.401, 0.366), resolution=(1220, 2712)))
     
 #推荐
 def home_page():
@@ -258,7 +257,31 @@ def welfare():
             poco(text="去看剧").click()
             sleep(1)
             poco(textMatches="已完结.*?")[3].click()
-            sleep(650)
+            wait_time = 650  # 30分钟
+            start_time = time.time()
+            while True:
+                # 计算已经等待的时间
+                elapsed_time = time.time() - start_time
+
+                # 如果已经超过等待时间，退出循环
+                if elapsed_time >= wait_time:
+                    print("已等待超过10分钟，退出程序")
+                    break
+
+                try:                 
+                    # 等待元素加载（根据实际情况修改选择器）
+                    for i in range(3):
+                        sleep(220)
+                        keyevent("BACK")
+                        sleep(1)
+                        poco(textMatches="已完结.*?")[i+3].click()
+                        sleep(1)
+                except Exception as e:
+                    # 捕获任何异常并打印
+                    print("发生异常:", str(e))
+
+                # 等待一段时间后继续循环，这里可以根据实际情况调整等待时间
+                time.sleep(5)            
             keyevent("BACK")
             sleep(1)
             poco(text="福利").click()
@@ -275,13 +298,15 @@ def welfare():
             keyevent("BACK")
             sleep(1)
             poco(text="福利").click()
+        count = 0
         while poco(text="领取").exists():
             poco(text="领取")[0].click()
             sleep(1)
             poco("com.jz.htdj:id/btn_close").click()
             assert_equal("1", "1", "领取奖励成功")
             sleep(2)
-            log()
+            count += 1
+        print("福利领取{}次，一般情况是3次如果不是请检查福利页".format(count))
             
 #我的tab
 def my():
