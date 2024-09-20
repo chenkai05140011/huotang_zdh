@@ -80,15 +80,16 @@ def home_page():
     keyevent("BACK")
     while not poco(text="广告").exists():
         swipe(start_pt1, end_pt1,1000)
-        sleep(1)
+        sleep(2)
     assert_equal("1", "1", "推荐页信息流广告加载成功")
-    for i in range(6):
+    for i in range(3):
         swipe(start_pt1, end_pt1,1000)
-        poco("com.jz.htdj:id/iv_collect").exists()
-        poco("com.jz.htdj:id/iv_collect").click()
         sleep(1)
-        poco("com.jz.htdj:id/iv_like").exists()
-        poco("com.jz.htdj:id/iv_like").click()
+        if poco("com.jz.htdj:id/iv_collect").exists():
+            poco("com.jz.htdj:id/iv_collect").click()
+        sleep(1)
+        if poco("com.jz.htdj:id/iv_like").exists():
+            poco("com.jz.htdj:id/iv_like").click()
         sleep(3)
 
 # 播放详情页
@@ -234,7 +235,7 @@ def history():
 def welfare():
     poco(text="福利").wait_for_appearance()
     poco(text="福利").click()
-    sleep(1)
+    sleep(5)
     if poco(text="去登录").exists():
         log("需要人工干预登录")
     else:
@@ -281,7 +282,7 @@ def welfare():
                     print("发生异常:", str(e))
 
                 # 等待一段时间后继续循环，这里可以根据实际情况调整等待时间
-                time.sleep(5)            
+                sleep(5)            
             keyevent("BACK")
             sleep(1)
             poco(text="福利").click()
@@ -460,43 +461,43 @@ try:
     print("推荐自动化任务执行成功")
 except Exception as e:
     print("发生异常:", str(e))
-    print("推荐tab自动化任务执行失败")
+    print("推荐自动化任务执行失败")
     
-try:
-    play_details_page()
-    print("播放详情页自动化任务执行成功")
-except Exception as e:
-    print("发生异常:", str(e))
-    print("播放详情页自动化任务执行失败")
+# try:
+#     play_details_page()
+#     print("播放详情页自动化任务执行成功")
+# except Exception as e:
+#     print("发生异常:", str(e))
+#     print("播放详情页自动化任务执行失败")
 
-try:
-    theater()
-    print("剧场tab自动化任务执行成功")
-except Exception as e:
-    print("发生异常:", str(e))
-    print("剧场tab自动化任务执行失败")
+# try:
+#     theater()
+#     print("剧场tab自动化任务执行成功")
+# except Exception as e:
+#     print("发生异常:", str(e))
+#     print("剧场tab自动化任务执行失败")
 
-try:
-    history()
-    print("在看剧自动化任务执行成功")
-except Exception as e:
-    print("发生异常:", str(e))
-    print("在看剧自动化任务执行失败")
+# try:
+#     history()
+#     print("在看剧自动化任务执行成功")
+# except Exception as e:
+#     print("发生异常:", str(e))
+#     print("在看剧自动化任务执行失败")
 
-try:
-    welfare()
-    print("福利自动化任务执行成功")
-except Exception as e:
-    print("发生异常:", str(e))
-    print("福利自动化任务执行失败")
+# try:
+#     welfare()
+#     print("福利自动化任务执行成功")
+# except Exception as e:
+#     print("发生异常:", str(e))
+#     print("福利自动化任务执行失败")
     
-try:
-    my()
-    stop_app('com.jz.htdj')
-    print("我的自动化任务执行成功")
-except Exception as e:
-    print("发生异常:", str(e))
-    print("我的自动化任务执行失败")
+# try:
+#     my()
+#     stop_app('com.jz.htdj')
+#     print("我的自动化任务执行成功")
+# except Exception as e:
+#     print("发生异常:", str(e))
+#     print("我的自动化任务执行失败")
 
 # generate html report
 # from airtest.report.report import simple_report
