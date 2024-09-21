@@ -91,6 +91,8 @@ def home_page():
         if poco("com.jz.htdj:id/iv_like").exists():
             poco("com.jz.htdj:id/iv_like").click()
         sleep(3)
+    sleep(1)
+    poco(text = "首页").wait_for_appearance()
 
 # 播放详情页
 def play_details_page(password="680401"):
@@ -146,6 +148,8 @@ def play_details_page(password="680401"):
         ad_clos()
     keyevent("BACK")
     swipe(start_pt1, end_pt1,1000)
+    sleep(1)
+    poco(text="剧场").wait_for_appearance()
 
 #剧场tab
 def theater():
@@ -189,7 +193,7 @@ def theater():
             poco("com.jz.htdj:id/iv_collect").click()
             assert_equal("1", "1", "详情追剧成功")
             sleep(1)
-        poco("com.jz.htdj:id/tv_select_drama_ad").wait_for_appearance()
+        sleep(1)
         keyevent("BACK")
         sleep(1)
         
@@ -209,7 +213,8 @@ def theater():
     for i in range(5):
         swipe(start_pt1, end_pt1,1000)
         sleep(1)
-
+    sleep(1)
+    poco(text = "首页").wait_for_appearance()
 #看过tab
 def history():
     poco(text = "首页").wait_for_appearance()
@@ -230,7 +235,8 @@ def history():
     else:
         poco(textMatches="已完结.*?")[0].click()
     keyevent("BACK")
-
+    sleep(1)
+    poco(text="福利").wait_for_appearance()
 #福利tab
 def welfare():
     poco(text="福利").wait_for_appearance()
@@ -308,6 +314,8 @@ def welfare():
             sleep(2)
             count += 1
         print("福利领取{}次，一般情况是3次如果不是请检查福利页".format(count))
+    sleep(1)
+    poco(text="我的").wait_for_appearance()
             
 #我的tab
 def my():
@@ -401,7 +409,8 @@ def my():
     sleep(2)
     poco(text="反馈与投诉").wait_for_appearance()
     poco(text="功能体验与使用").click()
-#     poco(text="请输入手机号便于联系").set_text("15868385402")
+    sleep(1)
+    poco("form-phone").set_text("15868385402")
     sleep(1)
     poco(text="加载缓慢/失败").click()
     sleep(1)
@@ -458,47 +467,57 @@ try:
     swipe(start_pt1, end_pt1,1000)
     start_app('com.jz.htdj')
     home_page()
-    print("推荐自动化任务执行成功")
+    print("推荐页测试用例执行成功")
 except Exception as e:
     print("发生异常:", str(e))
-    print("推荐自动化任务执行失败")
+    print("推荐测试用例执行失败")
+    stop_app('com.jz.htdj')
     
 try:
+    start_app('com.jz.htdj')
     play_details_page()
-    print("播放详情页自动化任务执行成功")
+    print("播放详情页测试用例任务执行成功")
 except Exception as e:
     print("发生异常:", str(e))
-    print("播放详情页自动化任务执行失败")
+    print("播放详情页测试用例执行失败")
+    stop_app('com.jz.htdj')
 
 try:
+    start_app('com.jz.htdj')
     theater()
-    print("剧场tab自动化任务执行成功")
+    print("剧场页测试用例执行成功")
 except Exception as e:
     print("发生异常:", str(e))
-    print("剧场tab自动化任务执行失败")
+    print("剧场页测试用例执行失败")
+    stop_app('com.jz.htdj')
 
 try:
+    start_app('com.jz.htdj')
     history()
-    print("在看剧自动化任务执行成功")
+    print("在看剧页测试用例执行成功")
 except Exception as e:
     print("发生异常:", str(e))
-    print("在看剧自动化任务执行失败")
+    print("在看剧页测试用例执行失败")
+    stop_app('com.jz.htdj')
 
 try:
+    start_app('com.jz.htdj')
     welfare()
-    print("福利自动化任务执行成功")
+    print("福利页测试用例执行成功")
 except Exception as e:
-    print("发生异常:", str(e))
-    print("福利自动化任务执行失败")
+    print("发生异常:", str(e)) 
+    print("福利页测试用例执行失败")
+    stop_app('com.jz.htdj')
     
 try:
+    start_app('com.jz.htdj')
     my()
     stop_app('com.jz.htdj')
     print("我的自动化任务执行成功")
 except Exception as e:
     print("发生异常:", str(e))
     print("我的自动化任务执行失败")
-
+    
 # generate html report
 # from airtest.report.report import simple_report
 # simple_report(__file__, logpath=True)
