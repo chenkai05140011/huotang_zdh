@@ -50,6 +50,12 @@ def ad_clos():
         poco("android.widget.ImageView").click()
         assert_equal("1", "1", "激励视频观看完成")
         sleep(1)
+    start_app('com.jz.htdj')
+    sleep(1)
+    if poco("android.widget.ImageView").exists():
+        poco("android.widget.ImageView").click()
+        assert_equal("1", "1", "激励视频观看完成")
+        sleep(1)
     sleep(5)
     
 #推荐
@@ -123,6 +129,7 @@ def play_details_page(password="680401"):
     assert_equal("1", "1", "详情页选集成功")
     sleep(1)
     swipe(start_pt1, end_pt1,1000)
+    sleep(1)
     touch([0.5,0.5])
     sleep(1)
     poco("com.jz.htdj:id/iv_collect").exists()
@@ -297,7 +304,9 @@ def welfare():
             poco(textMatches="已完结.*?")[5].click()
             sleep(1)
             touch([0.5,0.5])
+            sleep(1)
             touch([0.5,0.5])
+            sleep(1)
             if poco("com.jz.htdj:id/iv_collect").exists():
                 poco("com.jz.htdj:id/iv_collect").click()
                 assert_equal("1", "1", "详情追剧成功")
@@ -451,17 +460,11 @@ def my():
     sleep(1)
     poco("com.jz.htdj:id/logoff_btn").click()
     sleep(1)
-    poco(text="注销账号后所有充值余额和会员权益将会永久失效，您确认注销吗?").wait_for_appearance
+    poco(text="注销账号后所有充值余额和会员权益将会永久失效，您确认注销吗?").wait_for_appearance()
     poco(text="坚持注销账号").click()
     assert_equal("1", "1", "用户注销成功")
     sleep(1)
-    
-                
-        
-        
-        
-        
-        
+          
 try:
     wake()
     swipe(start_pt1, end_pt1,1000)
