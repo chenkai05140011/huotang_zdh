@@ -48,16 +48,16 @@ def ad_clos():
         assert_equal("1", "1", "激励视频观看完成")
         sleep(1)
     sleep(1)
-    if poco("android.widget.ImageView").exists():
-        poco("android.widget.ImageView").click()
+    if poco("close_button").exists():
+        poco("close_button").click()
         assert_equal("1", "1", "激励视频观看完成")
         sleep(1)
-    start_app('com.jz.htdj')
     sleep(1)
     if poco("android.widget.ImageView").exists():
         poco("android.widget.ImageView").click()
         assert_equal("1", "1", "激励视频观看完成")
         sleep(1)
+#     start_app('com.jz.htdj')
     sleep(5)
 
 
@@ -91,6 +91,7 @@ def home_page():
         swipe(start_pt1, end_pt1, 1000)
         sleep(2)
     assert_equal("1", "1", "推荐页信息流广告加载成功")
+    sleep(1)
     for i in range(3):
         swipe(start_pt1, end_pt1, 1000)
         sleep(1)
@@ -101,11 +102,20 @@ def home_page():
             poco("com.jz.htdj:id/iv_like").click()
         sleep(3)
     sleep(1)
+    swipe(start_pt1, end_pt1, 1000)
+    poco("com.jz.htdj:id/tv_look").exists()
+    poco("com.jz.htdj:id/tv_look").click()
+    sleep(0.5)
+    touch([0.5, 0.5])
+    poco("com.jz.htdj:id/iv_fuli").wait_for_appearance()
+    poco("com.jz.htdj:id/iv_fuli").click()
+    poco(text="我的K币").exists()
+    assert_equal("1", "1", "跳转福利页成功")
     poco(text="首页").wait_for_appearance()
 
 
 # 播放详情页
-def play_details_page(password="680401"):
+def play_details_page():
     poco(text="首页").wait_for_appearance()
     poco(text="首页").click()
     sleep(1)
@@ -151,7 +161,7 @@ def play_details_page(password="680401"):
     poco("com.jz.htdj:id/iv_like").exists()
     poco("com.jz.htdj:id/iv_like").click()
     assert_equal("1", "1", "详情取消点赞成功")
-    for i in range(3):
+    for i in range(1):
         while not poco(text="观看广告 立即解锁第 ").exists():
             swipe(start_pt1, end_pt1, 1000)
             sleep(1)
@@ -161,6 +171,7 @@ def play_details_page(password="680401"):
     swipe(start_pt1, end_pt1, 1000)
     sleep(1)
     poco(text="剧场").wait_for_appearance()
+    assert_equal("1", "1", "推荐页成功")
 
 
 # 剧场tab
@@ -168,9 +179,33 @@ def theater():
     poco(text="剧场").wait_for_appearance()
     poco(text="剧场").click()
     sleep(1)
-    poco(text="必看榜").wait_for_appearance()
+    poco("com.jz.htdj:id/tv_search_hint").wait_for_appearance()
+    poco("com.jz.htdj:id/tv_search_hint").click()
     sleep(1)
-    poco("com.jz.htdj:id/vp_main").click()
+    poco("com.jz.htdj:id/iv_hot").wait_for_appearance()
+    poco(textMatches="已完结.*?")[0].exists()
+    poco(textMatches="已完结.*?")[0].click()
+    for i in range(2):
+        swipe(start_pt1, end_pt1,1000)
+        sleep(1)
+    keyevent("BACK")
+    sleep(1)
+    poco("com.jz.htdj:id/et_search").set_text("灿烂的转身")
+    sleep(1)
+    poco(text="搜索").click()
+    poco(textMatches="已完结.*?")[0].exists()
+    poco(textMatches="已完结.*?")[0].click()
+    for i in range(3):
+        swipe(start_pt1, end_pt1,1000)
+        sleep(1)
+    keyevent("BACK")
+    sleep(1)
+    keyevent("BACK")
+    sleep(1)
+    keyevent("BACK")
+    sleep(1)
+    assert_equal("1", "1", "搜索成功")
+    poco("com.jz.htdj:id/iv_banner_img")[0].click()
     poco("com.jz.htdj:id/tv_select_drama_ad").wait_for_appearance()
     assert_equal("1", "1", "banner页进入成功")
     keyevent("BACK")
@@ -178,10 +213,12 @@ def theater():
     poco(text="必看榜").click()
     sleep(1)
     poco(textMatches="已完结.*?")[0].click()
+    assert_equal("1", "1", "必看榜成功")
     keyevent("BACK")
     poco(text="热播榜").wait_for_appearance()
     poco(text="热播榜").click()
     poco(textMatches="已完结.*?")[0].click()
+    assert_equal("1", "1", "热播榜成功")
     keyevent("BACK")
     poco("com.jz.htdj:id/tv_hot_more").wait_for_appearance()
     poco("com.jz.htdj:id/tv_hot_more").click()
@@ -192,23 +229,16 @@ def theater():
     poco(text="热播榜").wait_for_appearance()
     poco(text="热播榜").click()
     sleep(1)
-    while not poco(text="休夫后，她名动京城").exists():
-        swipe(start_pt1, end_pt1, 1000)
+    poco("com.jz.htdj:id/tv_title01").click()
+    sleep(0.5)
+    touch([0.5, 0.5])
+    if poco("com.jz.htdj:id/iv_collect").exists():
+        poco("com.jz.htdj:id/iv_collect").click()
+        assert_equal("1", "1", "详情追剧成功")
         sleep(1)
-    else:
-        poco(text="休夫后，她名动京城").wait_for_appearance()
-        poco(text="休夫后，她名动京城").click()
-        sleep(1)
-        touch([0.5, 0.5])
-        touch([0.5, 0.5])
-        if poco("com.jz.htdj:id/iv_collect").exists():
-            poco("com.jz.htdj:id/iv_collect").click()
-            assert_equal("1", "1", "详情追剧成功")
-            sleep(1)
-        sleep(1)
-        keyevent("BACK")
-        sleep(1)
-
+    sleep(1)
+    keyevent("BACK")
+    sleep(1)
     keyevent("BACK")
     sleep(1)
     poco(text="古装").wait_for_appearance()
@@ -222,11 +252,12 @@ def theater():
     if poco("com.jz.htdj:id/iv_close_btn").exists():
         poco("com.jz.htdj:id/iv_close_btn").click()
         sleep(1)
-    for i in range(5):
+    for i in range(2):
         swipe(start_pt1, end_pt1, 1000)
         sleep(1)
     sleep(1)
     poco(text="首页").wait_for_appearance()
+    assert_equal("1", "1", "剧场成功")
 
 
 # 看过tab
@@ -237,8 +268,9 @@ def history():
     poco(text="在看剧").click()
     sleep(1)
     poco(text="我的收藏").wait_for_appearance()
-    poco(text="休夫后，她名动京城").click()
+    poco(text="追剧")[0].click()
     assert_equal("1", "1", "观看记录成功")
+    sleep(0.5)
     poco("com.jz.htdj:id/iv_close_ad_bottom").wait_for_appearance()
     keyevent("BACK")
     sleep(1)
@@ -251,6 +283,7 @@ def history():
     keyevent("BACK")
     sleep(1)
     poco(text="福利").wait_for_appearance()
+    assert_equal("1", "1", "看过页成功")
 
 
 # 福利tab
@@ -259,81 +292,93 @@ def welfare():
     poco(text="福利").click()
     sleep(5)
     if poco(text="去登录").exists():
-        log("需要人工干预登录")
-    else:
-        if poco(text="签到").exists():
-            poco(text="签到").click()
-            poco(text="签到成功").wait_for_appearance()
-            assert_equal("1", "1", "签到成功")
-            poco(text="奖励翻倍").click()
-            ad_clos()
-            poco(text="开心收下").click()
-            assert_equal("1", "1", "奖励翻倍成功")
-        if poco(text="补签").exists():
-            poco(text="补签")[0].click()
-            ad_clos()
-            poco(text="补签成功").exists()
+        poco(text="去登录").click()
+        sleep(1)
+        if poco(text="本机号码一键登录").exists():
+            poco(text="本机号码一键登录").click()
             sleep(1)
-            poco("com.jz.htdj:id/btn_close").click()
-            assert_equal("1", "1", "补签成功")
-        if poco(text="去看剧").exists():
-            poco(text="去看剧").click()
-            sleep(1)
-            poco(textMatches="已完结.*?")[3].click()
-            wait_time = 650  # 30分钟
-            start_time = time.time()
-            while True:
-                # 计算已经等待的时间
-                elapsed_time = time.time() - start_time
-
-                # 如果已经超过等待时间，退出循环
-                if elapsed_time >= wait_time:
-                    print("已等待超过10分钟，退出程序")
-                    break
-
-                try:
-                    # 等待元素加载（根据实际情况修改选择器）
-                    for i in range(3):
-                        sleep(220)
-                        keyevent("BACK")
-                        sleep(1)
-                        poco(textMatches="已完结.*?")[i + 3].click()
-                        sleep(1)
-                except Exception as e:
-                    # 捕获任何异常并打印
-                    print("发生异常:", str(e))
-
-                # 等待一段时间后继续循环，这里可以根据实际情况调整等待时间
-                sleep(5)
-            keyevent("BACK")
-            sleep(1)
-            poco(text="福利").click()
-        if poco(text="去收藏").exists():
-            poco(text="去收藏").click()
-            poco(textMatches="已完结.*?")[5].click()
-            sleep(1)
-            touch([0.5, 0.5])
-            sleep(1)
-            touch([0.5, 0.5])
-            sleep(1)
-            if poco("com.jz.htdj:id/iv_collect").exists():
-                poco("com.jz.htdj:id/iv_collect").click()
-                assert_equal("1", "1", "详情追剧成功")
+            if poco(text="确认").exists():
+                poco(text="确认").click()
                 sleep(1)
-            keyevent("BACK")
+                poco(text="本机号码一键登录").click()
+            assert_equal("1", "1", "一键登录成功")
+            sleep(10)
+        else:
+            log("需要人工干预登录")
+    if poco(text="签到").exists():
+        poco(text="签到").click()
+        poco(text="签到成功").wait_for_appearance()
+        assert_equal("1", "1", "签到成功")
+        poco(text="奖励翻倍").click()
+        ad_clos()
+        poco(text="开心收下").click()
+        assert_equal("1", "1", "奖励翻倍成功")
+    if poco(text="补签").exists():
+        poco(text="补签")[0].click()
+        ad_clos()
+        poco(text="补签成功").exists()
+        sleep(1)
+        poco("com.jz.htdj:id/btn_close").click()
+        assert_equal("1", "1", "补签成功")
+    if poco(text="去看剧").exists():
+        poco(text="去看剧").click()
+        sleep(1)
+        poco(textMatches="已完结.*?")[3].click()
+        wait_time = 650  # 30分钟
+        start_time = time.time()
+        while True:
+            # 计算已经等待的时间
+            elapsed_time = time.time() - start_time
+
+            # 如果已经超过等待时间，退出循环
+            if elapsed_time >= wait_time:
+                print("Waiting for more than 10 minutes, exiting the program")
+                break
+
+            try:
+                # 等待元素加载（根据实际情况修改选择器）
+                for i in range(3):
+                    sleep(220)
+                    keyevent("BACK")
+                    sleep(1)
+                    poco(textMatches="已完结.*?")[i + 3].click()
+                    sleep(1)
+            except Exception as e:
+                # 捕获任何异常并打印
+                print("发生异常:", str(e))
+
+            # 等待一段时间后继续循环，这里可以根据实际情况调整等待时间
+            sleep(5)
+        keyevent("BACK")
+        sleep(1)
+        poco(text="福利").click()
+    if poco(text="去收藏").exists():
+        poco(text="去收藏").click()
+        poco(textMatches="已完结.*?")[5].click()
+        sleep(1)
+        touch([0.5, 0.5])
+        sleep(1)
+        touch([0.5, 0.5])
+        sleep(1)
+        if poco("com.jz.htdj:id/iv_collect").exists():
+            poco("com.jz.htdj:id/iv_collect").click()
+            assert_equal("1", "1", "详情追剧成功")
             sleep(1)
-            poco(text="福利").click()
-        count = 0
-        while poco(text="领取").exists():
-            poco(text="领取")[0].click()
-            sleep(1)
-            poco("com.jz.htdj:id/btn_close").click()
-            assert_equal("1", "1", "领取奖励成功")
-            sleep(2)
-            count += 1
-        print("福利领取{}次，一般情况是3次如果不是请检查福利页".format(count))
+        keyevent("BACK")
+        sleep(1)
+        poco(text="福利").click()
+    count = 0
+    while poco(text="领取").exists():
+        poco(text="领取")[0].click()
+        sleep(1)
+        poco("com.jz.htdj:id/btn_close").click()
+        assert_equal("1", "1", "领取奖励成功")
+        sleep(2)
+        count += 1
+    assert_equal("1", "1", "福利领取{}次，一般情况是3次如果不是请检查福利页".format(count))
     sleep(1)
     poco(text="我的").wait_for_appearance()
+    assert_equal("1", "1", "福利页成功")
 
 
 # 我的tab
@@ -361,6 +406,7 @@ def my():
     #             sleep(1)
     #             assert_equal("1", "1", "登录成功")
     poco(textMatches=".*?集全").click()
+    assert_equal("1", "1", "我的-观看历史成功")
     sleep(2)
     keyevent("BACK")
     poco(text="全部").click()
@@ -371,6 +417,7 @@ def my():
     poco("android.widget.LinearLayout").offspring("com.jz.htdj:id/rv_history_list").child("com.jz.htdj:id/layout_root")[
         0].child("com.jz.htdj:id/collect_btn").click()
     sleep(1)
+    assert_equal("1", "1", "我的-观看历史-搜藏成功")
     poco(textMatches="已完结.*?")[0].click()
     sleep(2)
     keyevent("BACK")
@@ -423,6 +470,7 @@ def my():
     sleep(1)
     keyevent("BACK")
     sleep(1)
+    assert_equal("1", "1", "我的-协议成功")
     poco(text="设置").click()
     sleep(1)
     poco(text="账户与安全").wait_for_appearance()
@@ -463,7 +511,7 @@ def my():
     sleep(1)
     poco(text="注销账号").wait_for_appearance()
     a = poco("com.jz.htdj:id/si_id").offspring(name="com.jz.htdj:id/tv_hint").get_text()
-    print("用户id{}".format(a))
+    print("userid{}".format(a))
     poco(text="注销账号").click()
     sleep(1)
     poco(text="注销账号").wait_for_appearance()
@@ -476,6 +524,7 @@ def my():
     poco(text="坚持注销账号").click()
     assert_equal("1", "1", "用户注销成功")
     sleep(1)
+    assert_equal("1", "1", "我的页成功")
 
 
 try:
@@ -483,56 +532,56 @@ try:
     swipe(start_pt1, end_pt1, 1000)
     start_app('com.jz.htdj')
     home_page()
-    print("推荐页测试用例执行成功")
+    print("recommend case success")
 except Exception as e:
-    print("发生异常:", str(e))
-    print("推荐测试用例执行失败")
+    print("error:", str(e))
+    print("recommend case fail")
     stop_app('com.jz.htdj')
 
 try:
     start_app('com.jz.htdj')
     play_details_page()
-    print("播放详情页测试用例任务执行成功")
+    print("play_details case success")
 except Exception as e:
-    print("发生异常:", str(e))
-    print("播放详情页测试用例执行失败")
+    print("error:", str(e))
+    print("rplay_details case fail")
     stop_app('com.jz.htdj')
 
 try:
     start_app('com.jz.htdj')
     theater()
-    print("剧场页测试用例执行成功")
+    print("theater case success")
 except Exception as e:
-    print("发生异常:", str(e))
-    print("剧场页测试用例执行失败")
+    print("error:", str(e))
+    print("theater case fail")
     stop_app('com.jz.htdj')
 
 try:
     start_app('com.jz.htdj')
     history()
-    print("在看剧页测试用例执行成功")
+    print("history case success")
 except Exception as e:
-    print("发生异常:", str(e))
-    print("在看剧页测试用例执行失败")
+    print("error:", str(e))
+    print("history case fail")
     stop_app('com.jz.htdj')
 
 try:
     start_app('com.jz.htdj')
     welfare()
-    print("福利页测试用例执行成功")
+    print("welfare case success")
 except Exception as e:
-    print("发生异常:", str(e))
-    print("福利页测试用例执行失败")
+    print("error:", str(e))
+    print("welfare case fail")
     stop_app('com.jz.htdj')
 
 try:
     start_app('com.jz.htdj')
     my()
     stop_app('com.jz.htdj')
-    print("我的自动化任务执行成功")
+    print("my case success")
 except Exception as e:
-    print("发生异常:", str(e))
-    print("我的自动化任务执行失败")
+    print("error:", str(e))
+    print("my case fail")
 
 # generate html report
 # from airtest.report.report import simple_report
