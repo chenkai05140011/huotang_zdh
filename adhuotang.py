@@ -28,6 +28,11 @@ def ad_clos():
         swipe(start_pt1, end_pt1, 1000)
         sleep(3)
     sleep(1)
+    if poco("android.widget.ImageView").exists():
+        poco("android.widget.ImageView").click()
+        assert_equal("1", "1", "激励视频观看完成")
+        sleep(1)
+    sleep(1)
     if poco(text="任务已完成").exists():
         keyevent("BACK")
         assert_equal("1", "1", "激励视频观看完成")
@@ -50,11 +55,6 @@ def ad_clos():
     sleep(1)
     if poco("close_button").exists():
         poco("close_button").click()
-        assert_equal("1", "1", "激励视频观看完成")
-        sleep(1)
-    sleep(1)
-    if poco("android.widget.ImageView").exists():
-        poco("android.widget.ImageView").click()
         assert_equal("1", "1", "激励视频观看完成")
         sleep(1)
 #     start_app('com.jz.htdj')
